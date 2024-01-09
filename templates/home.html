@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<title>UI Page</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <style>
+    body {
+        background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#7b9432)) fixed;
+      }
+    #loading{
+    width: 100px;
+    height: 500px;
+    display:none;
+    cursor: wait;
+    margin:auto;
+    }
+
+</style>
+</head>
+<body>
+<div class= "justify-content-center" id="loading">
+<img src="{{url_for('static', filename='pleaseWait.gif')}}"/>
+</div>
+<div class="container" id="content">
+    <h3 style="text-align:center;margin-top:30px;">
+            IOC Validation
+            <small class="text-muted">Automation</small>
+          </h3>
+<form action="{{ url_for('upload_file')}}" method="POST" id="form1" enctype="multipart/form-data">
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Email address</label>
+    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" placeholder="Email Address">
+    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+  </div><br>
+  <div class="form-group">
+      <label for="exampleInputEmail1" class="form-label">Choose your File</label><br>
+    <input type="file" class="form-control-file" id="exampleFormControlFile1" name="myfile" required>
+  </div>
+    <br>
+  <div class="form-group">
+    <label for="abusedb">AbuseDb API</label>
+    <input type="text" class="form-control"  name="abusedbip" id="abusedb" aria-describedby="abusedbhelp" placeholder="Enter AbuseDB API">
+    <small id="abusedbhelp" class="form-text text-muted">We'll never share your API.</small>
+  </div>
+    <br>
+    <div class="form-group">
+    <label for="virustotal">VirusTotal API</label>
+    <input type="text" class="form-control" name="virustotalid" id="virustotal" aria-describedby="virustotalhelp" placeholder="Enter VirusTotal API">
+    <small id="virustotalhelp" class="form-text text-muted">We'll never share your API.</small>
+  </div>
+    <br>
+  <button style="padding:7px 17px 7px 17px;" type="submit" class="btn btn-primary" form="form1" onclick="loading();">Submit</button>
+</form>
+    <form  action="{{ url_for('send_email')}}" method="GET" id="form2" enctype="multipart/form-data">
+    <button style="float:right;margin-right:40%;margin-top:-38px;" type="submit" class="btn btn-outline-primary"data-toggle="tooltip" data-placement="top" title="Send the Email" value="Submit" form="form2">Send Email</button>
+    </form>
+<!--    {% if result == "success" %}-->
+<!--    <script>-->
+<!--        alert("Email sent!");-->
+<!--    </script>-->
+<!--    {% else %}-->
+<!--    <script>-->
+<!--        alert("Please Provide File!");-->
+<!--    </script>-->
+<!--    {% endif %}-->
+</div>
+</body>
+<script type="text/javascript">
+        function loading(){
+            $("#loading").show();
+            $("#content").hide();
+        }
+</script>
+</html>
